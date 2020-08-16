@@ -19,3 +19,10 @@ export let Colors:Record<string,Color> = {
 	"Black" : new Color(0,0,0),
 	"Gray": new Color(0.5,0.5,0.5)
 }
+
+
+ 
+ 
+
+ 
+

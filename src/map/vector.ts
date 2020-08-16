@@ -1,5 +1,3 @@
-import {Color} from './color'
-
 export class Vector{
 	x:number=0;
 	y:number=0;
@@ -22,7 +20,6 @@ export class Vector{
 	}
 
 	draw(){
-		love.graphics.setColor(1,0,0,1)
 		love.graphics.rectangle("fill",this.x-2,this.y-2,4,4,2,2)
 	}
 }
