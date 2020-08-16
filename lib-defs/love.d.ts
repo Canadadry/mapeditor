@@ -1510,15 +1510,6 @@ declare interface Mesh extends Drawable {
    */
   getTexture(): Texture;
 
-  /**
-   * Gets the properties of a vertex in the Mesh.
-   *
-   * @param index The index of the the vertex you want to retrieve the information for.
-   * @return {number} attributecomponent, The first component of the first vertex attribute in the specified vertex.
-   * @return {number} ..., Additional components of all vertex attributes in the specified vertex.
-   */
-  /** !TupleReturn */
-  getVertex(index: number): [number, number];
 
   /**
    * Gets the properties of a vertex in the Mesh.
