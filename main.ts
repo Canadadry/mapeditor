@@ -7,8 +7,27 @@ let json = require("vendor.json")
 
 let mesh:Mesh
 let tree:QuadTree<Quad>
+let closest:Quad|null
 
 love.update = (dt) =>{}
+
+love.mousemoved = function( x:number, y:number,dx:number,dy:number,isTouch:boolean ){
+	let result = tree.searchClosest(x,y)
+	if (result == null){
+		return
+	}
+	if(closest==null){
+		closest = result[1]
+		closest.selected = true
+		return
+	}
+	if(closest == result[1]){
+		return
+	}
+	closest.selected = false
+	closest =result[1]
+	closest.selected = true
+}
 
 love.draw = function() {
 	love.graphics.clear(0,0,0)
@@ -34,7 +53,6 @@ love.load = ()=>{
 		let quad = new Quad(quadData[0],quadData[1],quadData[2],quadData[3])
 		let center = quad.computeCenter(mesh.points)
 		mesh.quads.push(quad)
-		mesh.centers.push(center)
 		tree.insert(quad,center.x,center.y)
 	}
 }
