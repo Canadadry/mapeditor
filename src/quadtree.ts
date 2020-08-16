@@ -40,17 +40,37 @@ export class QuadTree<T>{
 		for(let i:number=0;i<this.content.length;i++){
 			center = center.add(this.content[i][0])
 		}
-		center = center.mul(this.content.length)
+		center = center.mul(1/this.content.length)
 
 		this.splitX = center.x
 		this.splitY = center.y
+		this.children = [
+			new QuadTree<T>(),new QuadTree<T>(),new QuadTree<T>(),new QuadTree<T>()
+		]
 		for(let i:number=0;i<this.content.length;i++){
 			this.insert(this.content[i][1],this.content[i][0].x,this.content[i][0].y)
 		}
+		this.content = []
 	}
 
-	searchClosest(x:number,y:number):T|null{
-		return null
+	searchClosest(x:number,y:number):[number,T,Vector]|null{
+		let bucket = this.findBucket(x,y);
+		if(bucket != null ){
+			return bucket.searchClosest(x,y)
+		}
+		if(this.content.length <= 0){
+			return null
+		}
+		let min = this.content[0][0].dist(new Vector(x,y))
+		let minIdex = 0
+		for(let i:number=1;i<this.content.length;i++){
+			let currentMin = this.content[i][0].dist(new Vector(x,y))
+			if(min > currentMin){
+				min = currentMin
+				minIdex = i
+			}
+		}
+		return [min,this.content[minIdex][1],this.content[minIdex][0]]
 	}
 
 }
