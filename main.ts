@@ -22,7 +22,7 @@ love.draw = function() {
 
 
 love.load = ()=>{
-	map = new Map("assets/map.json")
+	map = new Map("assets/map.json","assets/tile.png")
 }
 
 
